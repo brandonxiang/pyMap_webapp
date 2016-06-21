@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>maptest</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/leaflet/0.7.7/leaflet.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/leaflet.draw/0.2.3/leaflet.draw.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        
+        html,
+        body,
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <!-- setting -->
+    <div class="modal fade" id="setting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">设置</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="itemname">项目名</label>
+                            <input  class="form-control" id="itemname" placeholder="项目名">
+                        </div>
+                        <div class="form-group">
+                            <label for="downloadname">下载文件名</label>
+                            <input class="form-control" id="downloadname" placeholder="下载文件名">
+                        </div>
+                        <div class="form-group">
+                            <label>底图类型</label>
+                            <select class="form-control">
+                            <option>高德影像</option>
+                            <option>天地图影像</option>
+                            <option>esrisat</option>
+                            <option>MapQuest影像</option>
+                            <option>谷歌影像</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bound">范围</label>
+                            <input class="form-control" disabled="disabled"  id="bound">
+                        </div>
+                        <div class="form-group">
+                            <label for="zoom">级别</label>
+                            <input  class="form-control" id="zoom" placeholder="级别">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="downloadstart">下载</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- download -->
+    <div class="modal fade" id="download" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">下载</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
+                            style="width: 45%">
+                            <span class="sr-only">45% Complete</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/leaflet/0.7.7/leaflet-src.js"></script>
+    <script src="//cdn.bootcss.com/leaflet.draw/0.2.3/leaflet.draw-src.js"></script>
+    <script src="static/coordtransform.js" type="text/javascript"></script>
+    <script src="static/app.js" type="text/javascript"></script>
+</body>
+
+</html>
