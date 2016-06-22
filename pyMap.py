@@ -58,7 +58,7 @@ def process_tilenum(left, right, top, bottom, zoom, output='mosaic', maptype="ga
 def download(left, right, top, bottom, zoom, maptype="gaode.image"):
     for x in trange(left, right + 1):
         for y in trange(top, bottom + 1):
-            path = './tiles/%i/%i/%i.png' % (zoom, x, y)
+            path = './tiles/%s/%i/%i/%i.png' % (maptype, zoom, x, y)
             if not os.path.exists(path):
                 _download(x, y, zoom, maptype)
 
@@ -67,7 +67,7 @@ def _download(x, y, z, maptype="gaode.image"):
     map_url = URL[maptype].format(x=x, y=y, z=z)
 
     r = requests.get(map_url)
-    path = './tiles/%i/%i' % (z, x)
+    path = './tiles/%s/%i/%i' % (maptype, z, x)
     if not os.path.isdir(path):
         os.makedirs(path)
     with open('%s/%i.png' % (path, y), 'wb') as f:
@@ -77,14 +77,14 @@ def _download(x, y, z, maptype="gaode.image"):
                 f.flush()
 
 
-def _mosaic(left, right, top, bottom, zoom, output='output/mosaic.png'):
+def _mosaic(left, right, top, bottom, zoom, output='mosaic', maptype="gaode.image"):
     size_x = (right - left + 1) * 256
     size_y = (bottom - top + 1) * 256
     output_im = Image.new("RGB", (size_x, size_y))
 
     for x in trange(left, right + 1):
         for y in trange(top, bottom + 1):
-            path = './tiles/%i/%i/%i.png' % (zoom, x, y)
+            path = './tiles/%s/%i/%i/%i.png' % (maptype, zoom, x, y)
             target_im = Image.open(path)
             output_im.paste(target_im, (256 * (x - left), 256 * (y - top)))
     output_path = os.path.split(output)

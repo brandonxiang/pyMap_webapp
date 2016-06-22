@@ -162,10 +162,11 @@ $('#downloadstart').click(function () {
             zoom: $('#zoom').val()
         },
         function (data) {
-            console.log(data);
+            // console.log(data);
+            alert(data);
         }
     );
-    $("#download").modal();
+    // $("#download").modal();
 });
 
 
