@@ -156,14 +156,43 @@ $('#downloadstart').click(function () {
     $.post(
         "./download",
         {
-            name:$('#name').val(),
-            type:$('#type').val(),
-            bound:$('#bound').val(),
-            zoom:$('#zoom').val()
+            name: $('#name').val(),
+            type: $('#type').val(),
+            bound: $('#bound').val(),
+            zoom: $('#zoom').val()
         },
-        function(data){
+        function (data) {
             console.log(data);
         }
     );
     $("#download").modal();
 });
+
+
+// coordinate
+var coordinate = L.control({ position: 'bottomleft' });
+
+coordinate.onAdd = function () {
+    this._div = L.DomUtil.create('div', 'info');
+    this._div.innerHTML = "<p id='lat'>纬度: " + map.getCenter().lat.toFixed(8) + "</p><p id='lng'>经度:" + map.getCenter().lng.toFixed(8) + "</p><p id='scale'>级别: " + map.getZoom() + "</p>";
+    return this._div;
+}
+
+coordinate.updateLatLng = function (latlng) {
+    L.DomUtil.get('lat').innerHTML = "纬度:" + latlng.lat;
+    L.DomUtil.get('lng').innerHTML = "经度:" + latlng.lng;
+}
+
+coordinate.updateZoom = function (zoom) {
+    L.DomUtil.get('scale').innerHTML = "级别:" + zoom;
+}
+
+coordinate.addTo(map);
+
+map.on("mousemove", function (e) {
+    coordinate.updateLatLng(e.latlng);
+});
+
+map.on("zoomend", function () {
+    coordinate.updateZoom(map.getZoom());
+})

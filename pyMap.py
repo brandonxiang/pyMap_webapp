@@ -9,13 +9,15 @@ import requests
 from PIL import Image
 from tqdm import trange
 
-url = {
-    "gaode": "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x=%i&y=%i&z=%i",
-    "gaode.image": "http://webst02.is.autonavi.com/appmaptile?style=6&x=%i&y=%i&z=%i",
-    "tianditu": "http://t1.tianditu.cn/DataServer?T=vec_w&X=%i&Y=%i&L=%i",
-    "googlesat": "http://khm0.googleapis.com/kh?v=203&hl=zh-CN&&x=%i&y=%i&z=%i"
+URL = {
+    "gaode": "http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}",
+    "gaode.image": "http://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
+    "tianditu": "http://t2.tianditu.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}",
+    "googlesat": "http://khm0.googleapis.com/kh?v=203&hl=zh-CN&&x={x}&y={y}&z={z}",
+    "tianditusat":"http://t2.tianditu.cn/DataServer?T=img_w&X={x}&Y={y}&L={z}",
+    "esrisat":"http://server.arcgisonline.com/arcgis/rest/services/world_imagery/mapserver/tile/{z}/{y}/{x}"
 }
-
+ 
 
 def process_latlng(north, west, south, east, zoom, output='mosaic', maptype="gaode.image"):
     """
@@ -62,7 +64,7 @@ def download(left, right, top, bottom, zoom, maptype="gaode.image"):
 
 
 def _download(x, y, z, maptype="gaode.image"):
-    map_url = url[maptype] % (x, y, z)
+    map_url = URL[maptype].format(x=x, y=y, z=z)
 
     r = requests.get(map_url)
     path = './tiles/%i/%i' % (z, x)
