@@ -17,7 +17,7 @@ url = {
 }
 
 
-def process_latlng(north, west, south, east, zoom, output='output/mosaic.png', maptype="gaode.image"):
+def process_latlng(north, west, south, east, zoom, output='mosaic', maptype="gaode.image"):
     """
     download and mosaic by latlng
 
@@ -27,7 +27,7 @@ def process_latlng(north, west, south, east, zoom, output='output/mosaic.png', m
     south -- south latitude
     east  -- east longitude
     zoom  -- map scale (0-18)
-    output -- output file name default output/mosaic.png
+    output -- output file name default mosaic
 
     """
     left, top = latlng2tilenum(north, west, zoom)
@@ -35,7 +35,7 @@ def process_latlng(north, west, south, east, zoom, output='output/mosaic.png', m
     process_tilenum(left, right, top, bottom, zoom, output, maptype)
 
 
-def process_tilenum(left, right, top, bottom, zoom, output='output/mosaic.png', maptype="gaode.image"):
+def process_tilenum(left, right, top, bottom, zoom, output='mosaic', maptype="gaode.image"):
     """
     download and mosaic by tile number
 
@@ -45,9 +45,10 @@ def process_tilenum(left, right, top, bottom, zoom, output='output/mosaic.png', 
     top    -- top tile number
     bottom -- bottom tile number
     zoom   -- map scale (0-18)
-    output -- output file name default output/mosaic.png
+    output -- output file name default mosaic
 
     """
+    output = "output/"+output+".png"
     download(left, right, top, bottom, zoom, maptype)
     _mosaic(left, right, top, bottom, zoom, output)
 

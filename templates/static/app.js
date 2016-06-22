@@ -115,12 +115,10 @@ map.on('draw:created', function (e) {
     drawnItems.addLayer(layer);
 
     if (type === "rectangle") {
-        var bounds = getBounds(layer);
-        console.log(bounds);
-        $('#bound').val(bounds.east+','+bounds.north+','+bounds.south+','+bounds.west);
+        var bound = getBounds(layer);
+        console.log(bound);
+        $('#bound').val(bound.north + ',' + bound.west + ',' + bound.south + ',' + bound.east);
         $('#setting').modal();
-
-
     }
 });
 
@@ -133,27 +131,39 @@ function getBounds(layer) {
             minLng = latlng.lng;
             maxLat = latlng.lat;
             maxLng = latlng.lng;
-        }else{
-            if(latlng.lat<minLat){
+        } else {
+            if (latlng.lat < minLat) {
                 minLat = latlng.lat;
-            }else if(latlng.lat>maxLat){
+            } else if (latlng.lat > maxLat) {
                 maxLat = latlng.lat;
-            }else if(latlng.lng<minLng){
+            } else if (latlng.lng < minLng) {
                 minLng = latlng.lng;
-            }else if(latlng.lng>maxLng){
+            } else if (latlng.lng > maxLng) {
                 maxLng = latlng.lng;
             }
         }
     }
     return {
-        south:minLat,
-        north:maxLat,
-        west:minLng,
-        east:maxLng
+        south: minLat,
+        north: maxLat,
+        west: minLng,
+        east: maxLng
     }
 }
 
 
-$('#downloadstart').click(function(){
-$("#download").modal();
+$('#downloadstart').click(function () {
+    $.post(
+        "./download",
+        {
+            name:$('#name').val(),
+            type:$('#type').val(),
+            bound:$('#bound').val(),
+            zoom:$('#zoom').val()
+        },
+        function(data){
+            alert(data);
+        }
+    )
+    $("#download").modal();
 });

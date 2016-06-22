@@ -53,7 +53,7 @@ L.control.layers({
     "天地图影像": tianditusat,
     "esrisat": esrisat,
     "MapQuest影像": mapquestsat,
-    "谷歌影像":google,
+    "谷歌影像": google,
     "Mapbox": mapbox,
     "osm": osm,
     "MapQuest": mapquest,
@@ -73,8 +73,8 @@ L.control.layers({
     "StamenWaterColor": StamenWaterColor,
     "OpenTopoMap": OpenTopoMap,
 }, {}, {
-    collapsed: false
-}).addTo(map);
+        collapsed: false
+    }).addTo(map);
 // var marker;
 // map.on('click', function(e) {
 //     if (map.hasLayer(marker)) {
@@ -89,3 +89,81 @@ L.control.layers({
 //     html += "<p>百度地图: <strong>" + baidu[1] + "," + baidu[0] + "</strong></p>";
 //     marker = L.marker(latlng).addTo(map).bindPopup(html).openPopup();
 // });
+
+
+var drawnItems = new L.FeatureGroup();
+map.addLayer(drawnItems);
+
+var drawControl = new L.Control.Draw({
+    draw: {
+        position: 'topleft',
+        polygon: false,
+        polyline: false,
+        circle: false,
+        marker: false,
+    },
+    edit: {
+        featureGroup: drawnItems
+    }
+});
+map.addControl(drawControl);
+
+map.on('draw:created', function (e) {
+    var type = e.layerType,
+        layer = e.layer;
+
+    drawnItems.addLayer(layer);
+
+    if (type === "rectangle") {
+        var bound = getBounds(layer);
+        console.log(bound);
+        $('#bound').val(bound.north + ',' + bound.west + ',' + bound.south + ',' + bound.east);
+        $('#setting').modal();
+    }
+});
+
+function getBounds(layer) {
+    var latlngs = layer.getLatLngs();
+    for (var index = 0, count = latlngs.length; index < count; index++) {
+        var latlng = latlngs[index];
+        if (index === 0) {
+            minLat = latlng.lat;
+            minLng = latlng.lng;
+            maxLat = latlng.lat;
+            maxLng = latlng.lng;
+        } else {
+            if (latlng.lat < minLat) {
+                minLat = latlng.lat;
+            } else if (latlng.lat > maxLat) {
+                maxLat = latlng.lat;
+            } else if (latlng.lng < minLng) {
+                minLng = latlng.lng;
+            } else if (latlng.lng > maxLng) {
+                maxLng = latlng.lng;
+            }
+        }
+    }
+    return {
+        south: minLat,
+        north: maxLat,
+        west: minLng,
+        east: maxLng
+    };
+}
+
+
+$('#downloadstart').click(function () {
+    $.post(
+        "./download",
+        {
+            name:$('#name').val(),
+            type:$('#type').val(),
+            bound:$('#bound').val(),
+            zoom:$('#zoom').val()
+        },
+        function(data){
+            console.log(data);
+        }
+    );
+    $("#download").modal();
+});
