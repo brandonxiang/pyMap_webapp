@@ -1,7 +1,9 @@
 # pyMap_webapp
 A webapp version for Raster Map Download Helper
 
-##Version 0.1
+##Version
+
+ALPHA 0.1
 
 ##Dependencies
 
