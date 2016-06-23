@@ -9,7 +9,7 @@ DICT = {
     "天地图影像": "tianditusat",
     "esrisat": "esrisat",
     "MapQuest影像": "mapquestsat",
-    "谷歌影像": "google",
+    "谷歌影像": "googlesat",
 }
 
 @app.route('/')

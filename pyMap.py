@@ -52,7 +52,7 @@ def process_tilenum(left, right, top, bottom, zoom, output='mosaic', maptype="ga
     """
     output = "output/"+output+".png"
     download(left, right, top, bottom, zoom, maptype)
-    _mosaic(left, right, top, bottom, zoom, output)
+    _mosaic(left, right, top, bottom, zoom, output, maptype)
 
 
 def download(left, right, top, bottom, zoom, maptype="gaode.image"):
