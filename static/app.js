@@ -151,23 +151,33 @@ function getBounds(layer) {
     };
 }
 
+$
 
 $('#downloadstart').click(function () {
-    $.post(
-        "./download",
-        {
-            name: $('#name').val(),
-            type: $('#type').val(),
-            bound: $('#bound').val(),
-            zoom: $('#zoom').val()
-        },
-        function (data) {
-            // console.log(data);
-            alert(data);
-        }
-    );
-    // $("#download").modal();
+    var name = $('#name').val();
+    var type = $('#type').val();
+    var bound = $('#bound').val();
+    var zoom = parseInt($('#zoom').val());
+
+    if(name !==""&& (!isNaN(zoom))&&(zoom > 0 && zoom < 20)){
+        $.post(
+            "./download",
+            {
+                name: name,
+                type: type,
+                bound: bound,
+                zoom: zoom
+            },
+            function (data) {
+                // console.log(data);
+                alert(data);
+            }
+        );
+        // $("#download").modal();
+    }
+
 });
+
 
 
 // coordinate

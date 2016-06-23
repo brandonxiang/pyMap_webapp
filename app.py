@@ -7,9 +7,9 @@ app = Flask(__name__)
 DICT = {
     "高德影像": "gaode.image",
     "天地图影像": "tianditusat",
-    "esrisat": "gaode.image",
-    "MapQuest影像": "gaode.image",
-    "谷歌影像": "gaode.image",
+    "esrisat": "esrisat",
+    "MapQuest影像": "mapquestsat",
+    "谷歌影像": "google",
 }
 
 @app.route('/')
