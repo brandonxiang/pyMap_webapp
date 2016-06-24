@@ -1,5 +1,6 @@
 # pyMap_webapp
 A webapp version for Raster Map Download Helper
+[中文文档](README_CN.md)
 
 ##Version
 
