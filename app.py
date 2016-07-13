@@ -10,6 +10,7 @@ DICT = {
     "esrisat": "esrisat",
     "MapQuest影像": "mapquestsat",
     "谷歌影像": "googlesat",
+    "高德路网": "gaode.road"
 }
 
 @app.route('/')

@@ -15,9 +15,10 @@ URL = {
     "tianditu": "http://t2.tianditu.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}",
     "googlesat": "http://khm0.googleapis.com/kh?v=203&hl=zh-CN&&x={x}&y={y}&z={z}",
     "tianditusat":"http://t2.tianditu.cn/DataServer?T=img_w&X={x}&Y={y}&L={z}",
-    "esrisat":"http://server.arcgisonline.com/arcgis/rest/services/world_imagery/mapserver/tile/{z}/{y}/{x}"
+    "esrisat":"http://server.arcgisonline.com/arcgis/rest/services/world_imagery/mapserver/tile/{z}/{y}/{x}",
+    "gaode.road": "http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8"
 }
- 
+
 
 def process_latlng(north, west, south, east, zoom, output='mosaic', maptype="gaode.image"):
     """
@@ -80,13 +81,15 @@ def _download(x, y, z, maptype="gaode.image"):
 def _mosaic(left, right, top, bottom, zoom, output='mosaic', maptype="gaode.image"):
     size_x = (right - left + 1) * 256
     size_y = (bottom - top + 1) * 256
-    output_im = Image.new("RGB", (size_x, size_y))
+    output_im = Image.new("RGBA", (size_x, size_y))
 
     for x in trange(left, right + 1):
         for y in trange(top, bottom + 1):
             path = './tiles/%s/%i/%i/%i.png' % (maptype, zoom, x, y)
-            target_im = Image.open(path)
-            output_im.paste(target_im, (256 * (x - left), 256 * (y - top)))
+            if os.path.exists(path):
+                target_im = Image.open(path)
+                if target_im.mode == 'P':
+                    output_im.paste(target_im, (256 * (x - left), 256 * (y - top)))
     output_path = os.path.split(output)
     if len(output_path) > 1 and len(output_path) != 0:
         if not os.path.isdir(output_path[0]):
@@ -114,7 +117,8 @@ def latlng2tilenum(lat_deg, lng_deg, zoom):
 
 
 def test():
-    process_latlng(22.4566710000, 113.8899620000, 22.3455760000, 114.2126860000, 13, 'output/houmen.png', "gaode")
+    # process_latlng(22.4566710000, 113.8899620000, 22.3455760000, 114.2126860000, 13, 'output/houmen.png', "gaode")
+    _mosaic(215552, 215967, 113763, 113923, 18, "output/hui.png", "gaode.road")
 
 
 def cml():

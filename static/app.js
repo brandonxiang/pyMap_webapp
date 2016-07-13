@@ -17,10 +17,10 @@ var tianditusat = new L.TileLayer('http://t{s}.tianditu.cn/DataServer?T=img_w&X=
 var tianditusurface = new L.TileLayer('http://t{s}.tianditu.cn/DataServer?T=ter_w&X={x}&Y={y}&L={z}', {
     subdomains: '01234567'
 });
-var gaode = new L.TileLayer('http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z=d{z}', {
+var gaode = new L.TileLayer('http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}', {
     subdomains: '1234'
 });
-var gaode1 = new L.TileLayer('http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z=d{z}', {
+var gaoderoad = new L.TileLayer('http://webst0{s}.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8', {
     subdomains: '1234'
 });
 var gaodesat = new L.TileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
@@ -60,6 +60,8 @@ L.control.layers({
     "天地图": tianditu,
     "天地图地形": tianditusurface,
     "图吧": tuba,
+    "gaode": gaode,
+    "gaoderoad": gaoderoad,
     "geoqBlue": geoqBlue,
     "geoqCommunity": geoqCommunity,
     "geoqGray": geoqGray,

@@ -23,6 +23,9 @@ pip install -r requirement
 
 On the develop branch
 
+##TODO
+- Image mode selection for RGBA and RGB
+
 ##LICENSE
 
 [MIT](LICENSE)
