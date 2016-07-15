@@ -116,13 +116,15 @@ map.on('draw:created', function (e) {
 
     drawnItems.addLayer(layer);
 
-    if (type === "rectangle") {
-        var bound = getBounds(layer);
-        console.log(bound);
-        $('#bound').val(bound.north + ',' + bound.west + ',' + bound.south + ',' + bound.east);
+    layer.on('dblclick',function(e){
+        var bound = e.target.getBounds();
+        $('#bound').val(bound.getNorth() + ',' + bound.getWest() + ',' + bound.getSouth() + ',' + bound.getEast());
         $('#setting').modal();
-    }
+    });
 });
+
+
+
 
 function getBounds(layer) {
     var latlngs = layer.getLatLngs();

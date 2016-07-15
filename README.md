@@ -2,31 +2,39 @@
 A webapp version for Raster Map Download Helper
 [中文文档](README_CN.md)
 
-##Version
+## Version
 
-ALPHA 0.1
+ALPHA 0.12
 
-##Dependencies
+## Dependencies
 
 - python 3.5
 - [Flask](https://github.com/pallets/flask)
 - [pyMap](https://github.com/brandonxiang/pyMap)
 - [Mapviewer](https://github.com/brandonxiang/MapViewer)
 
-##Installation
+## Installation
 
 ```
 pip install -r requirement
 ```
 
-##Development
+## Usage
+
+- use retangle tool to draw a range of area
+- double click that area to download the map
+- fill in the form for attributions
+
+## Development
 
 On the develop branch
 
-##TODO
-- Image mode selection for RGBA and RGB
+## TODO
+- image mode selection for RGBA and RGB
+- download function
+- process bar for download
 
-##LICENSE
+## LICENSE
 
 [MIT](LICENSE)
 
