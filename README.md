@@ -39,9 +39,8 @@ npm install
 On the develop branch
 
 ## TODO
-- image mode selection for RGBA and RGB
-- download function
-- process bar for download
+
+[TODO](TODO)
 
 ## LICENSE
 

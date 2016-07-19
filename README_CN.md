@@ -43,12 +43,9 @@ npm install
 
 开发在develop分支，而稳定版在master分支。
 
-
 ## TODO
 
-- 图片选择RGBA或RGB
-- 下载功能
-- 下载进度条
+[TODO](TODO)
 
 ## License
 
