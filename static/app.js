@@ -41,7 +41,6 @@ var geoqRailway = new L.TileLayer('http://thematic.geoq.cn/arcgis/rest/services/
 var StamenToner = new L.TileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {});
 var StamenWaterColor = new L.TileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png', {});
 var OpenTopoMap = new L.TileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {});
-// var atlaslight = new L.TileLayer('http://42.120.180.211:8080/mapservice?t=1&c={variant}&x={x}&y={y}&z={z}&size=1&v=light',{})
 var esrisat = new L.TileLayer('http://server.arcgisonline.com/arcgis/rest/services/world_imagery/mapserver/tile/{z}/{y}/{x}', {});
 var google = new L.TileLayer('http://khm0.googleapis.com/kh?v=203&hl=zh-CN&&x={x}&y={y}&z={z}', {});
 var map = new L.Map('map', {
@@ -77,21 +76,6 @@ L.control.layers({
 }, {}, {
         collapsed: false
     }).addTo(map);
-// var marker;
-// map.on('click', function(e) {
-//     if (map.hasLayer(marker)) {
-//         map.removeLayer(marker);
-//     }
-//     var latlng = e.latlng;
-//     var gcj = coordtransform.wgs84togcj02(latlng.lng, latlng.lat);
-//     var baidu = coordtransform.gcj02tobd09(gcj[0], gcj[1]);
-//     var html = "";
-//     html += "<p>谷歌地球: <strong>" + latlng.lat + "," + latlng.lng + "</strong></p>";
-//     html += "<p>高德腾讯: <strong>" + gcj[1] + "," + gcj[0] + "</strong></p>";
-//     html += "<p>百度地图: <strong>" + baidu[1] + "," + baidu[0] + "</strong></p>";
-//     marker = L.marker(latlng).addTo(map).bindPopup(html).openPopup();
-// });
-
 
 var drawnItems = new L.FeatureGroup();
 map.addLayer(drawnItems);
@@ -116,15 +100,14 @@ map.on('draw:created', function (e) {
 
     drawnItems.addLayer(layer);
 
-    layer.on('dblclick',function(e){
+    
+    layer.bindLabel('双击区域下载地图')
+        .on('dblclick',function(e){
         var bound = e.target.getBounds();
         $('#bound').val(bound.getNorth() + ',' + bound.getWest() + ',' + bound.getSouth() + ',' + bound.getEast());
         $('#setting').modal();
     });
 });
-
-
-
 
 function getBounds(layer) {
     var latlngs = layer.getLatLngs();
@@ -155,7 +138,6 @@ function getBounds(layer) {
     };
 }
 
-$
 
 $('#downloadstart').click(function () {
     var name = $('#name').val();
@@ -173,7 +155,6 @@ $('#downloadstart').click(function () {
                 zoom: zoom
             },
             function (data) {
-                // console.log(data);
                 alert(data);
             }
         );

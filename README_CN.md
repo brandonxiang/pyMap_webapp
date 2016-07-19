@@ -20,8 +20,17 @@ https://github.com/brandonxiang/pyMap_webapp
 
 ## 安装
 
+### Python 部分安装
+
 ```
 pip install -r requirement
+```
+
+### Javascript 部分安装
+
+```
+cd static
+npm install
 ```
 
 ## 使用

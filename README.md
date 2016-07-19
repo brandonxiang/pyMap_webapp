@@ -15,8 +15,17 @@ ALPHA 0.12
 
 ## Installation
 
+### Python Web Server Installation
+
 ```
 pip install -r requirement
+```
+
+### Javascript Package Installation
+
+```
+cd static
+npm install
 ```
 
 ## Usage
