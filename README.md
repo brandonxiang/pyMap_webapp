@@ -4,7 +4,7 @@ A webapp version for Raster Map Download Helper
 
 ## Version
 
-ALPHA 0.12
+ALPHA 0.13
 
 ## Dependencies
 
